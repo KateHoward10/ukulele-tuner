@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ukulele Tuner</title>
+    <style type="text/css">
+      body {
+        background-color: grey;
+      }
+      .uke {
+        width: 200px;
+        height: 2000px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+      .string {
+        width: 5px;
+        height: 200px;
+      }
+      #g {
+        background-color: orange;
+      }
+      #c {
+        background-color: deepskyblue;
+      }
+      #e {
+        background-color: lime;
+      }
+      #a {
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="uke">
+      <div class="string" id="g"></div>
+      <div class="string" id="c"></div>
+      <div class="string" id="e"></div>
+      <div class="string" id="a"></div>
+    </div>
+    <script type="text/javascript">
+      let context = new AudioContext(),
+        mousedown = false,
+        oscillator = null;
+      const frequencies = {
+        g: 392,
+        c: 261.63,
+        e: 329.63,
+        a: 440
+      };
+
+      document.querySelectorAll('.string').forEach(string =>
+        string.addEventListener('click', e => {
+          oscillator = context.createOscillator();
+          oscillator.frequency.value = frequencies[e.target.id];
+          oscillator.connect(context.destination);
+          oscillator.start(context.currentTime);
+          oscillator.stop(context.currentTime + 1);
+        })
+      );
+    </script>
+  </body>
+</html>
