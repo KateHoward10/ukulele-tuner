@@ -1,0 +1,45 @@
+body {
+  min-height: 100vh;
+  background-color: lightgrey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.labels {
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.uke {
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #eee;
+  box-shadow: 0 0 5px grey;
+}
+
+.string {
+  width: 5px;
+  height: 200px;
+}
+
+#g {
+  background-color: orange;
+}
+
+#c {
+  background-color: deepskyblue;
+}
+
+#e {
+  background-color: lime;
+}
+
+#a {
+  background-color: red;
+}

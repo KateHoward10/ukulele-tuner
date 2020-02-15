@@ -2,36 +2,15 @@
 <html lang="en">
   <head>
     <title>Ukulele Tuner</title>
-    <style type="text/css">
-      body {
-        background-color: grey;
-      }
-      .uke {
-        width: 200px;
-        height: 2000px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
-      .string {
-        width: 5px;
-        height: 200px;
-      }
-      #g {
-        background-color: orange;
-      }
-      #c {
-        background-color: deepskyblue;
-      }
-      #e {
-        background-color: lime;
-      }
-      #a {
-        background-color: red;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="labels">
+      <span>G</span>
+      <span>C</span>
+      <span>E</span>
+      <span>A</span>
+    </div>
     <div class="uke">
       <div class="string" id="g"></div>
       <div class="string" id="c"></div>
@@ -40,7 +19,6 @@
     </div>
     <script type="text/javascript">
       let context = new AudioContext(),
-        mousedown = false,
         oscillator = null;
       const frequencies = {
         g: 392,
