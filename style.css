@@ -44,6 +44,7 @@ button > * {
   flex-direction: row;
   justify-content: center;
   border-bottom: 1px solid darkgrey;
+  position: relative;
 }
 
 .string {
@@ -65,4 +66,14 @@ button > * {
 
 .a-string {
   background-color: red;
+}
+
+.finger {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: grey;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
