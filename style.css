@@ -1,4 +1,8 @@
 body {
+  margin: 0;
+}
+
+#ukulele-tuner {
   height: 100vh;
   margin: 0;
   background-color: lightgrey;
@@ -24,10 +28,6 @@ body {
   justify-content: space-around;
   background-color: #eee;
   box-shadow: 0 0 5px grey;
-}
-
-button > * {
-  pointer-events: none;
 }
 
 .section {
@@ -66,6 +66,10 @@ button > * {
 
 .a-string {
   background-color: red;
+}
+
+select {
+  width: 200px;
 }
 
 .finger {

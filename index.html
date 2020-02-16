@@ -14,22 +14,22 @@
         <span>A</span>
       </div>
       <div class="uke">
-        <div class="section" @click="pluckString('g')">
+        <div class="section" @mousedown="pluckString($event, 'g')" @mouseenter="pluckString($event, 'g')">
           <div v-for="(fret, index) in gFrets" :id="`g${index}`" class="fret">
             <div class="string g-string"></div>
           </div>
         </div>
-        <div class="section" @click="pluckString('c')">
+        <div class="section" @mousedown="pluckString($event, 'c')" @mouseenter="pluckString($event, 'c')">
           <div v-for="(fret, index) in cFrets" :id="`c${index}`" class="fret">
             <div class="string c-string"></div>
           </div>
         </div>
-        <div class="section" @click="pluckString('e')">
+        <div class="section" @mousedown="pluckString($event, 'e')" @mouseenter="pluckString($event, 'e')">
           <div v-for="(fret, index) in eFrets" :id="`e${index}`" class="fret">
             <div class="string e-string"></div>
           </div>
         </div>
-        <div class="section" @click="pluckString('a')">
+        <div class="section" @mousedown="pluckString($event, 'a')" @mouseenter="pluckString($event, 'a')">
           <div v-for="(fret, index) in aFrets" :id="`a${index}`" class="fret">
             <div class="string a-string"></div>
           </div>
@@ -43,59 +43,6 @@
       </select>
     </div>
     <script src="https://unpkg.com/vue"></script>
-    <script type="text/javascript">
-      const ukuleleTuner = new Vue({
-        el: '#ukulele-tuner',
-        data: {
-          context: new AudioContext(),
-          oscillator: null,
-          frequencies: {
-            'a#': 233.08,
-            b: 246.94,
-            c: 261.63,
-            'c#': 277.18,
-            d: 293.66,
-            'd#': 311.13,
-            e: 329.63,
-            f: 349.23,
-            'f#': 369.99,
-            g: 392,
-            'g#': 415.3,
-            a: 440
-          },
-          aFrets: ['a#', 'b', 'c', 'c#'],
-          eFrets: ['f', 'f#', 'g', 'g#'],
-          cFrets: ['c#', 'd', 'd#', 'e'],
-          gFrets: ['g#', 'a', 'a#', 'b'],
-          chord: 'none',
-          chords: {
-            c: ['a2'],
-            f: ['g1', 'e0'],
-            g: ['c1', 'e2', 'a1']
-          }
-        },
-        methods: {
-          pluckString: function(string) {
-            this.oscillator = this.context.createOscillator();
-            this.oscillator.frequency.value = this.frequencies[string];
-            this.oscillator.connect(this.context.destination);
-            this.oscillator.start(this.context.currentTime);
-            this.oscillator.stop(this.context.currentTime + 1);
-          },
-          setChord: function(e) {
-            document.querySelectorAll(".finger").forEach(finger => finger.remove());
-            const notes = this.chords[e.target.value];
-            if (notes) {
-              notes.forEach(note => {
-                const string = document.getElementById(note);
-                const finger = document.createElement("div");
-                finger.classList.add("finger");
-                string.appendChild(finger);
-              });
-            }
-          }
-        }
-      });
-    </script>
+    <script src="scripts.js"></script>
   </body>
 </html>
