@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ukulele Tuner</title>
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -12,10 +13,18 @@
       <span>A</span>
     </div>
     <div class="uke">
-      <div class="string" id="g"></div>
-      <div class="string" id="c"></div>
-      <div class="string" id="e"></div>
-      <div class="string" id="a"></div>
+      <button class="section" id="g">
+        <div class="string g-string"></div>
+      </button>
+      <button class="section" id="c">
+        <div class="string c-string"></div>
+      </button>
+      <button class="section" id="e">
+        <div class="string e-string"></div>
+      </button>
+      <button class="section" id="a">
+        <div class="string a-string"></div>
+      </button>
     </div>
     <script type="text/javascript">
       let context = new AudioContext(),
@@ -27,8 +36,8 @@
         a: 440
       };
 
-      document.querySelectorAll('.string').forEach(string =>
-        string.addEventListener('click', e => {
+      document.querySelectorAll('.section').forEach(section =>
+        section.addEventListener('click', e => {
           oscillator = context.createOscillator();
           oscillator.frequency.value = frequencies[e.target.id];
           oscillator.connect(context.destination);
