@@ -6,45 +6,72 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="labels">
-      <span>G</span>
-      <span>C</span>
-      <span>E</span>
-      <span>A</span>
+    <div id="ukulele-tuner">
+      <div class="labels">
+        <span>G</span>
+        <span>C</span>
+        <span>E</span>
+        <span>A</span>
+      </div>
+      <div class="uke">
+        <div class="section" @click="pluckString('g')">
+          <div v-for="fret in gFrets" class="fret">
+            <div class="string g-string"></div>
+          </div>
+        </div>
+        <div class="section" @click="pluckString('c')">
+          <div v-for="fret in cFrets" class="fret">
+            <div class="string c-string"></div>
+          </div>
+        </div>
+        <div class="section" @click="pluckString('e')">
+          <div v-for="fret in eFrets" class="fret">
+            <div class="string e-string"></div>
+          </div>
+        </div>
+        <div class="section" @click="pluckString('a')">
+          <div v-for="fret in aFrets" class="fret">
+            <div class="string a-string"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="uke">
-      <button class="section" id="g">
-        <div class="string g-string"></div>
-      </button>
-      <button class="section" id="c">
-        <div class="string c-string"></div>
-      </button>
-      <button class="section" id="e">
-        <div class="string e-string"></div>
-      </button>
-      <button class="section" id="a">
-        <div class="string a-string"></div>
-      </button>
-    </div>
+    <script src="https://unpkg.com/vue"></script>
     <script type="text/javascript">
-      let context = new AudioContext(),
-        oscillator = null;
-      const frequencies = {
-        g: 392,
-        c: 261.63,
-        e: 329.63,
-        a: 440
-      };
-
-      document.querySelectorAll('.section').forEach(section =>
-        section.addEventListener('click', e => {
-          oscillator = context.createOscillator();
-          oscillator.frequency.value = frequencies[e.target.id];
-          oscillator.connect(context.destination);
-          oscillator.start(context.currentTime);
-          oscillator.stop(context.currentTime + 1);
-        })
-      );
+      const ukuleleTuner = new Vue({
+        el: '#ukulele-tuner',
+        data: {
+          context: new AudioContext(),
+          oscillator: null,
+          frequencies: {
+            'a#': 233.08,
+            b: 246.94,
+            c: 261.63,
+            'c#': 277.18,
+            d: 293.66,
+            'd#': 311.13,
+            e: 329.63,
+            f: 349.23,
+            'f#': 369.99,
+            g: 392,
+            'g#': 415.3,
+            a: 440
+          },
+          gFrets: ['g', 'g#', 'a', 'a#'],
+          cFrets: ['c', 'c#', 'd', 'd#'],
+          eFrets: ['e', 'f', 'f#', 'g'],
+          aFrets: ['a', 'a#', 'b', 'c']
+        },
+        methods: {
+          pluckString: function(string) {
+            this.oscillator = this.context.createOscillator();
+            this.oscillator.frequency.value = this.frequencies[string];
+            this.oscillator.connect(this.context.destination);
+            this.oscillator.start(this.context.currentTime);
+            this.oscillator.stop(this.context.currentTime + 1);
+          }
+        }
+      });
     </script>
   </body>
 </html>
