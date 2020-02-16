@@ -1,7 +1,7 @@
 const ukuleleTuner = new Vue({
   el: '#ukulele-tuner',
   data: {
-    context: new AudioContext(),
+    context: new (AudioContext || webkitAudioContext)(),
     frequencies: {
       'a#': 233.08,
       b: 246.94,
@@ -32,9 +32,12 @@ const ukuleleTuner = new Vue({
       if (e.buttons === 1 || e.which === 1) {
         const oscillator = this.context.createOscillator();
         oscillator.frequency.value = this.frequencies[string];
-        oscillator.connect(this.context.destination);
+        const gainNode = this.context.createGain();
+        gainNode.gain.value = 0.3;
+        oscillator.connect(gainNode);
+        gainNode.connect(this.context.destination);
         oscillator.start(this.context.currentTime);
-        oscillator.stop(this.context.currentTime + 0.5);
+        oscillator.stop(this.context.currentTime + 0.3);
       }
     },
     setChord: function(e) {
