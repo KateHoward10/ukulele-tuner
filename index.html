@@ -14,24 +14,15 @@
         <span>A</span>
       </div>
       <div class="uke">
-        <div class="section" @mousedown="pluckString($event, 'g')" @mouseenter="pluckString($event, 'g')">
-          <div v-for="(fret, index) in gFrets" :id="`g${index}`" class="fret">
-            <div class="string g-string"></div>
-          </div>
-        </div>
-        <div class="section" @mousedown="pluckString($event, 'c')" @mouseenter="pluckString($event, 'c')">
-          <div v-for="(fret, index) in cFrets" :id="`c${index}`" class="fret">
-            <div class="string c-string"></div>
-          </div>
-        </div>
-        <div class="section" @mousedown="pluckString($event, 'e')" @mouseenter="pluckString($event, 'e')">
-          <div v-for="(fret, index) in eFrets" :id="`e${index}`" class="fret">
-            <div class="string e-string"></div>
-          </div>
-        </div>
-        <div class="section" @mousedown="pluckString($event, 'a')" @mouseenter="pluckString($event, 'a')">
-          <div v-for="(fret, index) in aFrets" :id="`a${index}`" class="fret">
-            <div class="string a-string"></div>
+        <div
+          v-for="(string, name) in strings"
+          class="section"
+          @mousedown="pluckString($event)"
+          @mouseenter="pluckString($event)"
+          :id="name"
+        >
+          <div v-for="(fret, index) in string" :id="`${name}${index}`" class="fret">
+            <div :class="`string ${name}-string`"></div>
           </div>
         </div>
       </div>
