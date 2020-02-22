@@ -24,6 +24,7 @@ const ukuleleTuner = new Vue({
     },
     chord: 'none',
     chords: {
+      none: [],
       c: ['a2'],
       f: ['g1', 'e0'],
       g: ['c1', 'e2', 'a1']
@@ -33,7 +34,7 @@ const ukuleleTuner = new Vue({
     pluckString: function(e) {
       if (e.buttons === 1 || e.which === 1) {
         const oscillator = this.context.createOscillator();
-        oscillator.frequency.value = this.frequencies[e.target.id];
+        oscillator.frequency.value = this.frequencies[e.target.value];
         const gainNode = this.context.createGain();
         gainNode.gain.value = 0.3;
         oscillator.connect(gainNode);
@@ -43,6 +44,9 @@ const ukuleleTuner = new Vue({
       }
     },
     setChord: function(e) {
+      document
+        .querySelectorAll('.section')
+        .forEach(section => section.setAttribute('value', section.getAttribute('id')));
       document.querySelectorAll('.finger').forEach(finger => finger.remove());
       const notes = this.chords[e.target.value];
       if (notes) {
@@ -54,7 +58,7 @@ const ukuleleTuner = new Vue({
           const currentNote = string.parentElement;
           const stringName = note.split('')[0];
           const fret = note.split('')[1];
-          currentNote.setAttribute('id', this.strings[stringName][fret]);
+          currentNote.setAttribute('value', this.strings[stringName][fret]);
         });
       }
     }

@@ -14,17 +14,18 @@
         <span>A</span>
       </div>
       <div class="uke">
-        <div
+        <button
           v-for="(string, name) in strings"
           class="section"
           @mousedown="pluckString($event)"
           @mouseenter="pluckString($event)"
           :id="name"
+          :value="name"
         >
           <div v-for="(fret, index) in string" :id="`${name}${index}`" class="fret">
             <div :class="`string ${name}-string`"></div>
           </div>
-        </div>
+        </button>
       </div>
       <select @change="setChord($event)">
         <option value="none">No chord</option>
