@@ -1,7 +1,9 @@
+const audioContext = window.AudioContext || window.webkitAudioContext;
+
 const ukuleleTuner = new Vue({
   el: '#ukulele-tuner',
   data: {
-    context: new (AudioContext || webkitAudioContext)(),
+    context: new (audioContext)(),
     frequencies: {
       'a#': 233.08,
       b: 246.94,
