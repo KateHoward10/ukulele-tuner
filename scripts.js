@@ -34,7 +34,7 @@ const ukuleleTuner = new Vue({
   },
   methods: {
     pluckString: function(e) {
-      if (e.buttons === 1 || e.which === 1) {
+      if (e.buttons === 1) {
         const oscillator = this.context.createOscillator();
         oscillator.frequency.value = this.frequencies[e.target.value];
         const gainNode = this.context.createGain();
